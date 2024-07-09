@@ -1,4 +1,7 @@
 
+import 'package:crm_django/CRUD/read.dart';
+import 'package:crm_django/components.dart';
+import 'package:crm_django/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'models/person.dart';
@@ -30,4 +33,27 @@ class Prov extends ChangeNotifier{
     }
     notifyListeners();
   }
+
+  void userLogin ({
+    required String email ,
+    required String password ,
+    BuildContext ? context
+  }){
+    //emit(shopLoginLoadingStates()); // to scroll for 2 second with consitionalBuilder help
+    dioHelper.postDataForShopApp(
+        url: LOGIN ,
+        data: {
+          'email' : email ,
+          'password' : password
+        }
+    ).then((value){
+      print(value.data);
+      if(context != null)
+        navigateAndFinish(context, read());
+      notifyListeners();
+    }).catchError((error){
+      print('----\n${error.toString()}--\n');
+    });
+  }
+
 }

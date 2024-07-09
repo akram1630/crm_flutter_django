@@ -2,6 +2,7 @@ import 'package:crm_django/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../auth/login.dart';
 import '../components.dart';
 import 'create.dart';
 
@@ -17,6 +18,9 @@ class read extends StatelessWidget {
             ElevatedButton(onPressed: (){
               navigateAndFinish(context, create());
             }, child: Text('Create new')),
+            ElevatedButton(onPressed: (){
+              navigateAndFinish(context, login());
+            }, child: Text('logout')),
             Consumer<Prov>(
               builder: (context,prov,child){
                 return Expanded(
