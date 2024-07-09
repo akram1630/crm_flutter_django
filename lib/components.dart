@@ -116,4 +116,43 @@ Color chooseToastColor(toastStates state) {
   return color;
 }
 
-
+Container myTextForm(
+    {required String label,
+    Icon? icon,
+    double? height,
+    double? width,
+    TextEditingController? controller,
+    Color? color,
+    int numOfForm = 0,
+    bool obscureText = false,
+    void Function()? prefixPressed}) {
+  return Container(
+    color: Colors.black.withOpacity(0.055),
+    child: TextFormField(
+      obscureText: obscureText,
+      controller: controller,
+      validator: (value) {
+/* if (numOfForm == 1) //password
+        if (value!.isEmpty || !isValidString(value))
+          return 'password should have numbers & majuscule';
+        if (numOfForm == 2) //Email
+        if (value!.isEmpty || !isValidEmail(value))
+          return 'please enter a valide email address';*/
+        return null;
+      },
+      decoration: InputDecoration(
+        prefixIcon: icon,
+        suffix: numOfForm == 1
+            ? IconButton(
+                icon: Icon(obscureText
+                    ? Icons.remove_red_eye_rounded
+                    : Icons.remove_red_eye_outlined),
+                onPressed: prefixPressed,
+              )
+            : null,
+        border: OutlineInputBorder(),
+        label: Text(label),
+      ),
+    ),
+  );
+}
